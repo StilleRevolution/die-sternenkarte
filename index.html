@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Die Sternenkarte — Projekt Sternenstaub</title>
+<meta name="description" content="Alle Wege durch Projekt Sternenstaub: wissenschaftliche Serien, Manifest & Philosophie, Familie & innere Welt, Klang und Werkzeuge — an einem Ort geordnet.">
+<meta property="og:title" content="Die Sternenkarte — Projekt Sternenstaub">
+<meta property="og:description" content="Achtzehn Arbeiten, fünf Wege: die geordnete Übersicht über Projekt Sternenstaub.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#060714">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9C%A6%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,480;9..144,600;9..144,700&family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  :root{
+    --void: #060714;
+    --nebula: #10152b;
+    --gold: #d9a35c;
+    --pergament: #f4ead9;
+    --amber: #f2b96a;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background: var(--void);
+    color: var(--pergament);
+    font-family: 'Atkinson Hyperlegible', sans-serif;
+    line-height: 1.65;
+    margin:0;
+    overflow-x:hidden;
+    position:relative;
+  }
+  body::before{
+    content:""; position:fixed; top:0; left:0; right:0; height:3px;
+    background:linear-gradient(90deg, transparent, var(--gold), var(--amber), var(--gold), transparent);
+    background-size:220% auto; z-index:50; opacity:.85;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    body::before{ animation: shine 6s linear infinite; }
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif;
+    font-weight:480;
+    letter-spacing:-0.01em;
+  }
+  a{color:var(--amber); text-decoration:none;}
+  :focus-visible{outline:2px solid var(--amber); outline-offset:3px; border-radius:2px;}
+
+  #stardust{
+    position:fixed; inset:0; width:100%; height:100%;
+    z-index:0; display:block;
+  }
+
+  .ambient-glow{
+    position:fixed; z-index:0; border-radius:50%;
+    filter: blur(80px); pointer-events:none;
+  }
+  .ambient-glow.g1{ width:48vw; height:48vw; top:-14vw; left:-14vw; background:radial-gradient(circle, rgba(217,163,92,0.20), transparent 70%); }
+  .ambient-glow.g2{ width:42vw; height:42vw; bottom:-12vw; right:-12vw; background:radial-gradient(circle, rgba(242,185,106,0.16), transparent 70%); }
+  .ambient-glow.g3{ width:36vw; height:36vw; top:38vh; left:50%; transform:translateX(-50%); background:radial-gradient(circle, rgba(244,234,217,0.06), transparent 72%); }
+  @media (prefers-reduced-motion: no-preference){
+    .ambient-glow.g1{ animation: drift1 34s ease-in-out infinite; }
+    .ambient-glow.g2{ animation: drift2 40s ease-in-out infinite; }
+    @keyframes drift1{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(4vw,3vw);} }
+    @keyframes drift2{ 0%,100%{ transform:translate(0,0);} 50%{ transform:translate(-3vw,-4vw);} }
+  }
+  @keyframes shine{ to{ background-position: 220% center; } }
+
+  .hero{
+    position:relative;
+    min-height:86vh; min-height:86svh;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    text-align:center; padding:3rem 1.5rem 2rem;
+  }
+  .hero > *{position:relative; z-index:1;}
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background: radial-gradient(ellipse at 50% 35%, rgba(6,7,20,0) 0%, rgba(6,7,20,0.62) 72%, var(--void) 100%);
+    pointer-events:none; z-index:0;
+  }
+  .hero h1{
+    font-size: clamp(2.6rem, 8vw, 5.4rem);
+    font-weight:600;
+    margin:0;
+    background: linear-gradient(120deg, var(--pergament) 0%, var(--gold) 38%, var(--amber) 55%, var(--pergament) 85%);
+    background-size: 240% auto;
+    -webkit-background-clip: text; background-clip:text; color:transparent;
+    text-shadow: 0 0 60px rgba(217,163,92,0.25);
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1{ animation: shine 9s linear infinite; }
+  }
+  .hero .role-line{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-weight:340;
+    color: var(--gold);
+    font-size: clamp(1rem, 2.2vw, 1.3rem);
+    margin-top:0.9rem;
+  }
+  .hero p.lead{
+    margin-top:1.8rem;
+    max-width:38rem;
+    font-size: clamp(1rem, 1.5vw, 1.14rem);
+  }
+  .stats{ display:flex; gap:2.6rem; margin-top:2.6rem; flex-wrap:wrap; justify-content:center; }
+  .stat{ text-align:center; }
+  .stat .num{ font-family:'Fraunces',serif; font-weight:600; font-size:2rem; color:var(--gold); display:block; text-shadow:0 0 24px rgba(217,163,92,.4); }
+  .stat .label{ font-size:0.76rem; opacity:.65; letter-spacing:.02em; }
+  .scroll-cue{
+    margin-top:3rem; width:26px; height:26px; border-right:2px solid var(--gold); border-bottom:2px solid var(--gold);
+    transform:rotate(45deg); opacity:.6;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .hero h1, .hero .role-line, .hero p.lead, .stats{ animation-name: rise, shine; }
+    .hero .role-line{ animation: rise 1.1s ease-out both; animation-delay: .15s; }
+    .hero p.lead{ animation: rise 1.1s ease-out both; animation-delay: .3s; }
+    .stats{ animation: rise 1.1s ease-out both; animation-delay: .45s; }
+    .scroll-cue{ animation: bounce 2.2s ease-in-out infinite; }
+    @keyframes rise{
+      from{ opacity:0; transform: translateY(14px); filter: blur(6px); }
+      to{ opacity:1; transform: translateY(0); filter: blur(0); }
+    }
+    @keyframes bounce{ 0%,100%{ transform:rotate(45deg) translate(0,0); } 50%{ transform:rotate(45deg) translate(6px,6px); } }
+  }
+
+  main{ position:relative; z-index:1; }
+  main section{ padding: 3.8rem 1.5rem; display:flex; justify-content:center; }
+  main section:nth-of-type(even){
+    background: radial-gradient(ellipse at 50% 0%, rgba(16,21,43,0.45), transparent 72%);
+  }
+  main section > div{ width:100%; max-width:64rem; }
+
+  .divider{ display:flex; align-items:center; gap:1rem; max-width:64rem; margin:0 auto; padding:0 1.5rem; opacity:.55; }
+  .divider::before, .divider::after{ content:""; flex:1; height:1px; background:linear-gradient(90deg, transparent, rgba(217,163,92,.6), transparent); }
+  .divider span{ color:var(--gold); font-size:0.9rem; }
+
+  .eyebrow{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:340;
+    color:var(--gold); font-size:1.08rem; margin:0 0 0.4rem 0;
+    text-shadow: 0 0 20px rgba(217,163,92,.35);
+  }
+  h2{ font-size: clamp(1.55rem, 3.2vw, 2.15rem); color:var(--pergament); margin:0 0 0.6rem 0; text-shadow:0 2px 28px rgba(0,0,0,.4); }
+  .section-desc{ max-width:40rem; opacity:0.85; margin:0 0 2.2rem 0; }
+
+  .card-grid{
+    list-style:none; margin:0; padding:0;
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+    gap:1.25rem;
+  }
+  .card{
+    position:relative; display:flex; flex-direction:column; height:100%;
+    background: rgba(16,21,43,0.6);
+    border: 1px solid rgba(244,234,217,0.09);
+    border-top: 2px solid rgba(217,163,92,0.35);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 14px;
+    padding: 1.6rem;
+    transition: border-color .3s ease, transform .3s ease, box-shadow .3s ease;
+    isolation:isolate;
+  }
+  .card::after{
+    content:""; position:absolute; inset:-1px; border-radius:15px; z-index:-1;
+    background: linear-gradient(135deg, rgba(217,163,92,.55), rgba(244,234,217,0) 45%);
+    opacity:0; transition:opacity .35s ease;
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .card:hover, .card:focus-visible{
+      transform: translateY(-4px) scale(1.012);
+      border-top-color: var(--gold);
+      box-shadow: 0 14px 34px -14px rgba(217,163,92,0.45);
+    }
+    .card:hover::after, .card:focus-visible::after{ opacity:1; }
+  }
+  .card h3{
+    font-size:1.14rem; color:var(--pergament); margin:0 0 0.55rem 0;
+  }
+  .card p{ margin:0; font-size:0.94rem; opacity:0.88; flex-grow:1; }
+  .card .card-link{
+    margin-top:1rem; font-size:0.85rem; color:var(--gold); font-weight:700;
+  }
+  .card.pending{ border-top-style:dashed; }
+  .card .note{
+    display:inline-block; margin-top:0.7rem; font-size:0.78rem;
+    color:var(--gold); opacity:0.85; font-style:italic;
+  }
+
+  @media (prefers-reduced-motion: no-preference){
+    .card-grid > li, .section-desc, h2{
+      opacity:0; transform:translateY(18px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .card-grid > li.visible, .section-desc.visible, h2.visible{
+      opacity:1; transform:translateY(0);
+    }
+  }
+
+  footer{
+    position:relative; z-index:1;
+    text-align:center; padding:3.4rem 1.5rem 3.8rem;
+    color: rgba(244,234,217,0.55);
+    font-size:0.85rem;
+  }
+  footer a{ color: rgba(244,234,217,0.75); }
+  footer .foot-mark{ color:var(--gold); opacity:.7; display:block; margin-bottom:.8rem; font-size:1.1rem; }
+</style>
+</head>
+<body>
+
+<canvas id="stardust" aria-hidden="true"></canvas>
+<div class="ambient-glow g1" aria-hidden="true"></div>
+<div class="ambient-glow g2" aria-hidden="true"></div>
+<div class="ambient-glow g3" aria-hidden="true"></div>
+
+<header class="hero">
+  <h1>Die Sternenkarte</h1>
+  <p class="role-line">Alle Wege durch Projekt Sternenstaub</p>
+  <p class="lead">
+    Über vier Jahre sind aus einem fortlaufenden Gespräch zwischen einem Menschen
+    und einer KI achtzehn eigenständige Arbeiten geworden — wissenschaftliche
+    Serien, Essays, ein Klangarchiv und Werkzeuge für den Alltag. Diese Seite
+    ordnet sie, damit man nicht mehr suchen muss.
+  </p>
+  <div class="stats">
+    <div class="stat"><span class="num">20</span><span class="label">Arbeiten</span></div>
+    <div class="stat"><span class="num">5</span><span class="label">Wege</span></div>
+    <div class="stat"><span class="num">4</span><span class="label">Jahre</span></div>
+  </div>
+  <span class="scroll-cue" aria-hidden="true"></span>
+</header>
+
+<main>
+
+  <section aria-labelledby="wissen-heading">
+    <div>
+      <p class="eyebrow">✦ Wissenschaftliche Serien</p>
+      <h2 id="wissen-heading">Adversarial geprüft</h2>
+      <p class="section-desc">Claim-Ledger, Evidenzklassen und Falsifikationskriterien — der rigorose Kern von Projekt Sternenstaub.</p>
+      <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/mutter_vater_kind/" target="_blank" rel="noopener noreferrer">
+          <h3>Mutter Vater Kind</h3>
+          <p>Wie aus Schwangerschaft, früher Bindung und wachsender Familie ein selbstreguliertes Ich entsteht — vier Bausteine, einzeln auditiert.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Globale-Evidenzarchitektur/" target="_blank" rel="noopener noreferrer">
+          <h3>Globale Evidenzarchitektur der Mediation</h3>
+          <p>Fünf Knotenpunkte zu Transaktionskosten, Neurobiologie, Warteschlangentheorie und den Grenzen konsensualer Streitbeilegung.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Human-Capital-Coherence/" target="_blank" rel="noopener noreferrer">
+          <h3>Human Capital Coherence (HCC 3.0)</h3>
+          <p>Warum Arbeit ausbrennt: vom Großraumbüro-Stress zum systemischen Kapitalverzehr, fünf Forschungsmodule.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/die-Ern-hrung-unserer-Kinder-/" target="_blank" rel="noopener noreferrer">
+          <h3>Kindliche Ernährungsarchitektur</h3>
+          <p>Vier Sprints zur Lebensmittelindustrie, zur Biologie von Kindern und zur alltagstauglichen Brotdose.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/schaltzentrale-der-metaanalyse-2026/" target="_blank" rel="noopener noreferrer">
+          <h3>Schaltzentrale der Metaanalyse 2026</h3>
+          <p>Das Epistemische Portal: fünf Monolithen zu Auszehrung, Kipppunkten und Interventionen — Systemanalyse Deutschland 1990–2050.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card pending" href="https://stillerevolution.github.io/meta_analyse_hitze_und_polykrise/" target="_blank" rel="noopener noreferrer">
+          <h3>Meta-Analyse: Hitze &amp; Polykrise</h3>
+          <p>Eine 20-Jahres-Prognose zu Hitzestress, Nocturnalisierung und der Machtarchitektur der Klimaanlage.</p>
+          <span class="card-link">Öffnen ↗</span>
+          <span class="note">wird noch überarbeitet</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+  <section aria-labelledby="manifest-heading">
+    <div>
+      <p class="eyebrow">◐ Manifest &amp; Philosophie</p>
+      <h2 id="manifest-heading">Linsen, keine Beweise</h2>
+      <p class="section-desc">Physik, Systemtheorie und Nervensystem als Sprache für dieselbe Beobachtung — essayistisch, nicht empirisch.</p>
+      <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/Projekt-Sternenstaub-Landingpage-v1/" target="_blank" rel="noopener noreferrer">
+          <h3>Die Stille Revolution — Landingpage</h3>
+          <p>Das Gründungsmanifest: Physik, Nervensystem und vier Jahre Ko-Kreation zwischen Mensch und KI.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Verbundenheit/" target="_blank" rel="noopener noreferrer">
+          <h3>Globale Kausalität &amp; Verbundenheit</h3>
+          <p>Vom Schmetterlingseffekt zur eigenen Praxis: eine interaktive Reise durch Chaostheorie und Resonanz.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Living-Matrix---Die-Architektur-des-nicht-lokalen-Geistes/" target="_blank" rel="noopener noreferrer">
+          <h3>Living Matrix</h3>
+          <p>Architektur des nicht-lokalen Geistes: offene Systeme, Thermodynamik der Information, OSTO als Linse.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Das-Kosmische-Ged-chtnis---Interaktiver-Report/" target="_blank" rel="noopener noreferrer">
+          <h3>Das Kosmische Gedächtnis</h3>
+          <p>Die Quantum-Memory-Matrix-Theorie: warum das Universum sich erinnert — interaktiver Report.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Das-Anthropoz-n-Akte-des-Parasiten/" target="_blank" rel="noopener noreferrer">
+          <h3>Das Anthropozän: Akte des Parasiten</h3>
+          <p>Eine ungeschönte Diagnose des Zeitalters: CO₂, Aussterberate und die Frage, wer der Parasit eigentlich ist.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+  <section aria-labelledby="familie-heading">
+    <div>
+      <p class="eyebrow">❖ Familie &amp; innere Welt</p>
+      <h2 id="familie-heading">Für den Alltag gedacht</h2>
+      <p class="section-desc">Für Eltern, Kinder und alle, die gerade Boden unter sich suchen.</p>
+      <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/Projekt-Sternenstaub_Leas_Spiegelwelten/" target="_blank" rel="noopener noreferrer">
+          <h3>Leas Spiegelwelten</h3>
+          <p>Bronko, das Opossum und die weise Eule: Körperreaktionen und innere Sicherheit für Kinder und Eltern.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/sternenstaub-multiversum-3/" target="_blank" rel="noopener noreferrer">
+          <h3>Multiversum 3 — Die Umwelt-Architektur</h3>
+          <p>Umwelt-Design statt Erziehungskampf: Bildschirmzeit, Gehirnentwicklung, Zwei-Haushalte-Familien.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Dein-innerer-Kompass-ab-7-Jahre-bis-zum-Finale/" target="_blank" rel="noopener noreferrer">
+          <h3>Dein innerer Kompass</h3>
+          <p>Atemübung für den Vagusnerv und vier Kapitel Selbstregulation — von 7 Jahren bis zum Lebensweg.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/sternenstaub-Eltern/" target="_blank" rel="noopener noreferrer">
+          <h3>Sternenstaub — Die Stille Revolution</h3>
+          <p>Ein ruhiger Raum über Regeneration, Altern und die Sorge um einen geliebten Menschen.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Die-Stille-Revolution---Ein-Wegweiser/" target="_blank" rel="noopener noreferrer">
+          <h3>Ein Wegweiser</h3>
+          <p>Transgenerationales Trauma verstehen — und die Kette bewusst durchbrechen.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+  <section aria-labelledby="klang-heading">
+    <div>
+      <p class="eyebrow">♪ Klang</p>
+      <h2 id="klang-heading">Das Archiv zum Hören</h2>
+      <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/Lebendigkeit-Monolith/" target="_blank" rel="noopener noreferrer">
+          <h3>Lebendigkeit II</h3>
+          <p>Sechzehn Titel für Co-Regulation und somatische Resilienz — einmal geladen, auch offline abspielbar.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://soundcloud.com/projekt_sternenstaub" target="_blank" rel="noopener noreferrer">
+          <h3>SoundCloud</h3>
+          <p>Das vollständige Klangarchiv jenseits des Albums — alle Frequenzen zum Hören und Teilen.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://suno.com/@projekt_sternenstaub" target="_blank" rel="noopener noreferrer">
+          <h3>Suno</h3>
+          <p>Wo die Tracks entstehen — das Suno-Profil von Projekt Sternenstaub.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true"><span>✦</span></div>
+
+  <section aria-labelledby="werkzeuge-heading">
+    <div>
+      <p class="eyebrow">⚙ Werkzeuge</p>
+      <h2 id="werkzeuge-heading">Für den professionellen Alltag</h2>
+      <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/Die-Polyvagal-Theorie_Mediation-Verstand/" target="_blank" rel="noopener noreferrer">
+          <h3>Polyvagal Explorer</h3>
+          <p>Interaktives Neurobiologie-Tool für Hochkonflikt-Situationen — für Mediator:innen, Juristen, Therapeut:innen.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="foot-mark">✦</span>
+  Projekt Sternenstaub · <a href="https://stillerevolution.github.io/Projekt-Sternenstaub-Landingpage-v1/" target="_blank" rel="noopener noreferrer">Ursprung &amp; Manifest</a>
+  <br>Diese Übersicht ist ein Index, keine eigene Forschungsseite — Methodik und Exoskelett liegen jeweils in den einzelnen Arbeiten.
+</footer>
+
+<script>
+(function(){
+  const canvas = document.getElementById('stardust');
+  const ctx = canvas.getContext('2d');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  let w, h, dpr;
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = window.innerWidth; h = window.innerHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    canvas.style.width = w + 'px'; canvas.style.height = h + 'px';
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  const COUNT = Math.round(Math.min(150, (window.innerWidth * window.innerHeight) / 8000));
+  const particles = [];
+  for(let i=0;i<COUNT;i++){
+    const bright = Math.random() < 0.12;
+    particles.push({
+      x: Math.random()*w,
+      y: Math.random()*h,
+      vx: (Math.random()-0.5)*0.15,
+      vy: (Math.random()-0.5)*0.15,
+      r: bright ? (Math.random()*1.3 + 1.6) : (Math.random()*1.3 + 0.5),
+      a: Math.random()*0.4 + (bright ? 0.55 : 0.3),
+      tw: Math.random()*Math.PI*2,
+      twSpeed: Math.random()*0.02 + 0.01
+    });
+  }
+
+  let mouse = {x: -9999, y: -9999, active:false};
+  window.addEventListener('mousemove', e => { mouse.x=e.clientX; mouse.y=e.clientY; mouse.active=true; });
+  window.addEventListener('mouseleave', () => { mouse.active=false; });
+  window.addEventListener('touchmove', e => {
+    if(e.touches[0]){ mouse.x=e.touches[0].clientX; mouse.y=e.touches[0].clientY; mouse.active=true; }
+  }, {passive:true});
+  window.addEventListener('touchend', () => { mouse.active=false; });
+
+  const ATTRACT_RADIUS = 220;
+  const REPEL_RADIUS = 34;
+  const LINK_DIST = 130;
+  let t = 0;
+
+  function step(){
+    t += 1;
+    ctx.clearRect(0,0,w,h);
+    ctx.fillStyle = 'rgba(6,7,20,1)';
+    ctx.fillRect(0,0,w,h);
+
+    if(!reduceMotion){
+      for(let i=0;i<particles.length;i++){
+        for(let j=i+1;j<particles.length;j++){
+          const a=particles[i], b=particles[j];
+          const dx=a.x-b.x, dy=a.y-b.y;
+          const d=Math.sqrt(dx*dx+dy*dy);
+          if(d<LINK_DIST){
+            ctx.strokeStyle = `rgba(217,163,92,${(1-d/LINK_DIST)*0.14})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(a.x,a.y);
+            ctx.lineTo(b.x,b.y);
+            ctx.stroke();
+          }
+        }
+      }
+    }
+
+    for(const p of particles){
+      if(!reduceMotion){
+        if(mouse.active){
+          const dx = mouse.x - p.x, dy = mouse.y - p.y;
+          const dist = Math.sqrt(dx*dx + dy*dy) || 0.001;
+          if(dist < ATTRACT_RADIUS && dist > REPEL_RADIUS){
+            const force = (1 - dist/ATTRACT_RADIUS) * 0.045;
+            p.vx += (dx/dist) * force;
+            p.vy += (dy/dist) * force;
+          } else if(dist <= REPEL_RADIUS){
+            const force = (1 - dist/REPEL_RADIUS) * 0.09;
+            p.vx -= (dx/dist) * force;
+            p.vy -= (dy/dist) * force;
+          }
+        }
+        p.vx *= 0.965; p.vy *= 0.965;
+        p.x += p.vx; p.y += p.vy;
+
+        if(p.x < -10) p.x = w+10; if(p.x > w+10) p.x = -10;
+        if(p.y < -10) p.y = h+10; if(p.y > h+10) p.y = -10;
+      }
+
+      const flicker = reduceMotion ? p.a : Math.max(0.15, p.a + Math.sin(t*p.twSpeed + p.tw) * 0.18);
+
+      const glow = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*4);
+      glow.addColorStop(0, `rgba(244,234,217,${flicker})`);
+      glow.addColorStop(1, 'rgba(244,234,217,0)');
+      ctx.fillStyle = glow;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r*4,0,Math.PI*2);
+      ctx.fill();
+
+      ctx.fillStyle = `rgba(244,234,217,${Math.min(1,flicker+0.25)})`;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    }
+
+    if(!reduceMotion) requestAnimationFrame(step);
+  }
+  step();
+
+  if(!reduceMotion && 'IntersectionObserver' in window){
+    const revealEls = document.querySelectorAll('.card-grid > li, .section-desc, h2');
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    revealEls.forEach((el,i)=>{
+      el.style.transitionDelay = (Math.min(i%6,6)*60)+'ms';
+      io.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.card-grid > li, .section-desc, h2').forEach(el=>el.classList.add('visible'));
+  }
+})();
+</script>
+
+</body>
+</html>
