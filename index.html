@@ -208,6 +208,30 @@
   }
   footer a{ color: rgba(244,234,217,0.75); }
   footer .foot-mark{ color:var(--gold); opacity:.7; display:block; margin-bottom:.8rem; font-size:1.1rem; }
+
+  .bgm-toggle{
+    position:fixed; z-index:40; bottom:1.4rem; right:1.4rem;
+    width:52px; height:52px; border-radius:50%;
+    background: rgba(16,21,43,0.7);
+    border: 1px solid rgba(244,234,217,0.15);
+    backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    color: var(--gold); font-size:1.3rem; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition: border-color .3s ease, box-shadow .3s ease, transform .2s ease;
+  }
+  .bgm-toggle:hover{ transform:scale(1.06); border-color: rgba(217,163,92,0.6); }
+  .bgm-toggle.playing{
+    border-color: var(--gold);
+    box-shadow: 0 0 0 0 rgba(217,163,92,0.5);
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .bgm-toggle.playing{ animation: bgmPulse 2.4s ease-out infinite; }
+    @keyframes bgmPulse{
+      0%{ box-shadow: 0 0 0 0 rgba(217,163,92,0.45); }
+      70%{ box-shadow: 0 0 0 14px rgba(217,163,92,0); }
+      100%{ box-shadow: 0 0 0 0 rgba(217,163,92,0); }
+    }
+  }
 </style>
 </head>
 <body>
@@ -227,7 +251,7 @@
     ordnet sie, damit man nicht mehr suchen muss.
   </p>
   <div class="stats">
-    <div class="stat"><span class="num">20</span><span class="label">Arbeiten</span></div>
+    <div class="stat"><span class="num">22</span><span class="label">Arbeiten</span></div>
     <div class="stat"><span class="num">5</span><span class="label">Wege</span></div>
     <div class="stat"><span class="num">4</span><span class="label">Jahre</span></div>
   </div>
@@ -242,6 +266,11 @@
       <h2 id="wissen-heading">Adversarial geprüft</h2>
       <p class="section-desc">Claim-Ledger, Evidenzklassen und Falsifikationskriterien — der rigorose Kern von Projekt Sternenstaub.</p>
       <ul class="card-grid">
+        <li><a class="card" href="https://stillerevolution.github.io/Das-Vo--Framework-Systemische-Ontologie-der-Symbiose/" target="_blank" rel="noopener noreferrer">
+          <h3>Das Voß-Framework</h3>
+          <p>Master-Knotenpunkt 01: Informationsthermodynamik, Neurobiologie und Frühförderökonomie zu einer Symbiose-Ontologie verdichtet — mit vollständigem Claim-Ledger.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
         <li><a class="card" href="https://stillerevolution.github.io/mutter_vater_kind/" target="_blank" rel="noopener noreferrer">
           <h3>Mutter Vater Kind</h3>
           <p>Wie aus Schwangerschaft, früher Bindung und wachsender Familie ein selbstreguliertes Ich entsteht — vier Bausteine, einzeln auditiert.</p>
@@ -265,6 +294,11 @@
         <li><a class="card" href="https://stillerevolution.github.io/schaltzentrale-der-metaanalyse-2026/" target="_blank" rel="noopener noreferrer">
           <h3>Schaltzentrale der Metaanalyse 2026</h3>
           <p>Das Epistemische Portal: fünf Monolithen zu Auszehrung, Kipppunkten und Interventionen — Systemanalyse Deutschland 1990–2050.</p>
+          <span class="card-link">Öffnen ↗</span>
+        </a></li>
+        <li><a class="card" href="https://stillerevolution.github.io/Sediert-statt-erholt-Cannabis-und-Alkohol-im-Vergleich-zur-Schlafarchitektur/" target="_blank" rel="noopener noreferrer">
+          <h3>Sediert statt erholt</h3>
+          <p>Cannabis und Alkohol im Claim-für-Claim-Vergleich zur Schlafarchitektur — REM, Spindeln, Melatonin, Glymphatik, Entzug.</p>
           <span class="card-link">Öffnen ↗</span>
         </a></li>
         <li><a class="card pending" href="https://stillerevolution.github.io/meta_analyse_hitze_und_polykrise/" target="_blank" rel="noopener noreferrer">
@@ -400,6 +434,36 @@
   Projekt Sternenstaub · <a href="https://stillerevolution.github.io/Projekt-Sternenstaub-Landingpage-v1/" target="_blank" rel="noopener noreferrer">Ursprung &amp; Manifest</a>
   <br>Diese Übersicht ist ein Index, keine eigene Forschungsseite — Methodik und Exoskelett liegen jeweils in den einzelnen Arbeiten.
 </footer>
+
+<audio id="bgm" loop preload="none">
+  <source src="./sternenstaub-ambient.mp3" type="audio/mpeg">
+</audio>
+<button id="bgm-toggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="Hintergrundmusik abspielen" title="Hintergrundmusik">
+  <span aria-hidden="true">♪</span>
+</button>
+
+<script>
+(function(){
+  const btn = document.getElementById('bgm-toggle');
+  const audio = document.getElementById('bgm');
+  btn.addEventListener('click', function(){
+    if(audio.paused){
+      audio.play().then(function(){
+        btn.classList.add('playing');
+        btn.setAttribute('aria-pressed','true');
+        btn.setAttribute('aria-label','Hintergrundmusik pausieren');
+      }).catch(function(){
+        btn.setAttribute('aria-label','Datei nicht gefunden — sternenstaub-ambient.mp3 im selben Ordner ablegen');
+      });
+    } else {
+      audio.pause();
+      btn.classList.remove('playing');
+      btn.setAttribute('aria-pressed','false');
+      btn.setAttribute('aria-label','Hintergrundmusik abspielen');
+    }
+  });
+})();
+</script>
 
 <script>
 (function(){
