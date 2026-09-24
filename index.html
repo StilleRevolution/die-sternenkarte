@@ -195,16 +195,6 @@
     color:var(--gold); opacity:0.85; font-style:italic;
   }
 
-  @media (prefers-reduced-motion: no-preference){
-    .card-grid > li, .section-desc, h2{
-      opacity:0; transform:translateY(18px);
-      transition: opacity .6s ease, transform .6s ease;
-    }
-    .card-grid > li.visible, .section-desc.visible, h2.visible{
-      opacity:1; transform:translateY(0);
-    }
-  }
-
   footer{
     position:relative; z-index:1;
     text-align:center; padding:3.4rem 1.5rem 3.8rem;
@@ -581,20 +571,8 @@
     if(!reduceMotion) requestAnimationFrame(step);
   }
   step();
+})();
+</script>
 
-  if(!reduceMotion && 'IntersectionObserver' in window){
-    const revealEls = document.querySelectorAll('.card-grid > li, .section-desc, h2');
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting){
-          entry.target.classList.add('visible');
-          io.unobserve(entry.target);
-        }
-      });
-    }, {threshold:0.15});
-    revealEls.forEach((el,i)=>{
-      el.style.transitionDelay = (Math.min(i%6,6)*60)+'ms';
-      io.observe(el);
-    });
-  } else {
-    document.querySelectorAll('.card-grid >
+</body>
+</html>
